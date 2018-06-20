@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PowerHub.Core.Dal.QueryParameters;
+using PowerHub.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,34 @@ namespace PowerHub.Core.Api.Controllers
                     Key = "key_three",
                     Name = "Name Three",
                     Description = "Description Three"
+                },
+                new TaskTestDto
+                {
+                    Id = Guid.Parse("ef0c2680-09ea-4ae4-b603-ff606f06b9ad"),
+                    Key = "key_four",
+                    Name = "Name Four",
+                    Description = "Description Four"
+                },
+                new TaskTestDto
+                {
+                    Id = Guid.Parse("b82d47cd-05b8-4f19-8bc7-68fa04e1548c"),
+                    Key = "key_five",
+                    Name = "Name Five",
+                    Description = "Description Five"
+                },
+                new TaskTestDto
+                {
+                    Id = Guid.Parse("1e894772-0cb8-4432-9cef-b387a855a186"),
+                    Key = "key_si",
+                    Name = "Name Six",
+                    Description = "Description Six"
+                },
+                new TaskTestDto
+                {
+                    Id = Guid.Parse("a32962d8-ef92-4514-9eb9-3c78bc0c17ad"),
+                    Key = "key_seven",
+                    Name = "Name Seven",
+                    Description = "Description Seven"
                 }
             };
         }
@@ -61,9 +91,25 @@ namespace PowerHub.Core.Api.Controllers
 
         [HttpGet]
         [Route("gettasks")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(Pagination pagination)
         {
-            return Ok(_tasks);
+            var query = _tasks
+                .AsQueryable()
+                .WhereIf(pagination.HasQuery, q =>
+                    q.Key.Contains(pagination.Query) ||
+                    q.Name.Contains(pagination.Query) ||
+                    q.Description.Contains(pagination.Query));
+
+            int count = query.Count();
+
+            Response.Headers.Add("X-Pagination", count.ToString());
+
+            var res = query
+                .Skip((pagination.Page - 1) * pagination.PageCount)
+                .Take(pagination.PageCount)
+                .ToList();
+
+            return Ok(res);
         }
 
         [HttpGet]

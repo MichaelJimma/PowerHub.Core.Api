@@ -44,7 +44,6 @@ namespace PowerHub.Core.Api
                 config.InputFormatters.Add(new XmlDataContractSerializerInputFormatter());//this will allow us to accept xml in the request
                 config.Filters.Add(typeof(ValidateModelFilter));
                 });
-
             services.AddCors();
         }
 
@@ -76,8 +75,17 @@ namespace PowerHub.Core.Api
                     });
                 });
             }
-            app.UseCors(q => q.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+
+            app.UseCors(q => q
+                .WithExposedHeaders("X-Pagination")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowCredentials()
+                .Build());
+
             app.UseMvc();
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UsePowerHubMiddleware();

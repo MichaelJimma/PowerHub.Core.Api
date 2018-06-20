@@ -1,3 +1,4 @@
 export class AppSettings {
-    readonly apiUrl: string = "http://localhost:51117/api"
+    readonly API_URL: string = "http://localhost:51117/api"
+    readonly PAGE_SIZE: number = 3;
 }

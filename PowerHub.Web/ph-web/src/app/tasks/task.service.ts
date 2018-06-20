@@ -4,6 +4,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AppSettingsService } from '../../shared/app-settings.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,25 @@ export class TaskService {
 
   readonly baseUrl:string;
   constructor(private http: HttpClient, private config: AppSettingsService) {
-    this.baseUrl = config.getSettings().apiUrl;
+    this.baseUrl = config.getSettings().API_URL;
    }
 
-  getTasks(): Observable<TaskDto[]> {
+  getTasks(pageNumber: number, pageSize = 3, query = ''): Observable<[TaskDto[],number]> {
     let url = `${this.baseUrl}/test/gettasks`;
-    return this.http.get<TaskDto[]>(url);
+
+    let params = new HttpParams();
+    params = params.append('page', pageNumber.toString());
+    params = params.append('pageCount', pageSize.toString());
+    params = params.append('query', query);
+
+    return this.http
+      .get<TaskDto[]>(url, { params: params, observe: 'response'})
+      .pipe(map(res => {
+        let payload:TaskDto[] = res.body;
+        let page:number = Number(res.headers.get('X-Pagination'));
+        let output: [TaskDto[],number] = [payload, page];
+        return output;
+      }));
   }
 
   getTaskById (taskId: string) : Observable<TaskDto> {

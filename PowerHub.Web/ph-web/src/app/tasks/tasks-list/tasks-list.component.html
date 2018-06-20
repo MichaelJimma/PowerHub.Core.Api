@@ -3,6 +3,17 @@
     <button routerLink="/tasks/create" id="create-task-button" type="button" class="btn btn-success">Create Task</button>
     <div class="clearfix"></div>
 </div>
+<div class="search-box-swapper">
+  <div class="input-group">
+    <input (keyup.enter)="getTasks(1,textbox.value)" #textbox class="form-control py-2" type="search" id="example-search-input">
+    <span class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" (click)="getTasks(1)">Clear</button>
+      <button class="btn btn-outline-secondary" type="button" (click)="getTasks(1,textbox.value)">
+        <fa name="search"></fa>
+      </button>
+    </span>
+  </div>
+</div>
 
 <table class="table">
     <colgroup>
@@ -32,3 +43,7 @@
       </tr>
     </tbody>
   </table>
+  <app-pagination [total-records]="totalRecords" [current-page]="currentPage" [route-path]="'/tasks'">
+
+  </app-pagination>
+

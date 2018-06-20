@@ -7,14 +7,21 @@ import { TasksRouting } from './tasks.routing';
 import { TaskService } from 'src/app/tasks/task.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppSettingsService } from '../../shared/app-settings.service';
+import { PaginationComponent } from 'src/app/pagination/pagination.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   imports: [
     CommonModule,
     TasksRouting,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFontAwesomeModule
   ],
-  declarations: [TasksListComponent, TaskCreateComponent, TaskUpdateComponent],
+  declarations: [
+    TasksListComponent, 
+    TaskCreateComponent, 
+    TaskUpdateComponent, 
+    PaginationComponent],
   providers: [TaskService,AppSettingsService]
 })
 export class TasksModule { }
