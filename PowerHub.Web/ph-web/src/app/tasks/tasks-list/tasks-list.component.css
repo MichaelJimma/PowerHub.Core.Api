@@ -1,0 +1,19 @@
+.header-wrapper {
+    padding: 10px;
+}
+
+#create-task-button {
+    float:right;
+}
+
+#header {
+    float:left;
+}
+
+.clearfix {
+    float:none;
+}
+
+.center-cell {
+    text-align: center;
+} 

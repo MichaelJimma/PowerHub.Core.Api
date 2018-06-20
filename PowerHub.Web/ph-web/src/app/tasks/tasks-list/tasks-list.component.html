@@ -1,0 +1,34 @@
+<div class='header-wrapper'>
+    <h3 id="header">Tasks List</h3>
+    <button routerLink="/tasks/create" id="create-task-button" type="button" class="btn btn-success">Create Task</button>
+    <div class="clearfix"></div>
+</div>
+
+<table class="table">
+    <colgroup>
+      <col style="width:40%">
+      <col style="width:40%">
+      <col style="width:10%">
+      <col style="width:10%">
+    </colgroup>  
+    <thead>
+      <tr>
+        <th scope="col">Key</th>
+        <th scope="col">Name</th>
+        <th class="center-cell" scope="col">Update</th>
+        <th class="center-cell" scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td>{{task.key}}</td>
+        <td>{{task.name}}</td>
+        <td class="center-cell">
+          <button [routerLink]="['/tasks/update', task.id]" type="button" class="btn btn-warning">Update</button>
+        </td>
+        <td class="center-cell">
+          <button type="button" class="btn btn-danger" (click)="deleteTask(task.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
