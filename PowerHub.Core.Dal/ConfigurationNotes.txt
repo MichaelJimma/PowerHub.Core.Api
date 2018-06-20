@@ -1,2 +1,0 @@
-﻿//install automapper
-Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection

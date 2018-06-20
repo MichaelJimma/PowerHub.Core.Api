@@ -1,2 +1,0 @@
-﻿1. To create the entity models:
-	Scaffold-DbContext "Server=MJ-SURFACE;Database=PowerHubClient;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir PowerHubCentralEntities -force

@@ -1,5 +1,0 @@
-﻿1. To create the entity models:
-	1.1 Executed scaffold command in the package manager console.
-		Scaffold-DbContext "Server=MJ-SURFACE;Database=PowerHubClient;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir PowerHubClientEntities -force
-	1.2 Add a constractor in PowerHubClientContext class:
-		public PowerHubClientContext(DbContextOptions<PowerHubClientContext> options) : base(options) { }
