@@ -8,7 +8,6 @@ namespace PowerHub.Core.Dal.ClientDbEntities.PowerHubClientEntities
 
         public PH_TrainingContext(DbContextOptions<PH_TrainingContext> options) : base(options) { }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Tasks>(entity =>
