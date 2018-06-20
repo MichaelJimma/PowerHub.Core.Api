@@ -1,5 +1,5 @@
 export class TaskDto {
-    public id:string;
+    public taskid:string;
     public key:string;
     public name:string;
     public description:string;

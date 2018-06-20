@@ -18,7 +18,7 @@ export class TaskService {
    }
 
   getTasks(pageNumber: number, pageSize = 3, query = ''): Observable<[TaskDto[],number]> {
-    let url = `${this.baseUrl}/test/gettasks`;
+    let url = `${this.baseUrl}/tasks`;
 
     let params = new HttpParams();
     params = params.append('page', pageNumber.toString());
@@ -29,29 +29,29 @@ export class TaskService {
       .get<TaskDto[]>(url, { params: params, observe: 'response'})
       .pipe(map(res => {
         let payload:TaskDto[] = res.body;
-        let page:number = Number(res.headers.get('X-Pagination'));
+        let page:number = Number(res.headers.get('x-pagination'));
         let output: [TaskDto[],number] = [payload, page];
         return output;
       }));
   }
 
   getTaskById (taskId: string) : Observable<TaskDto> {
-    let url = `${this.baseUrl}/test/gettask/${taskId}`;
+    let url = `${this.baseUrl}/tasks/${taskId}`;
     return this.http.get<TaskDto>(url);
   }
 
   addTask (task: TaskDto) {
-    let url = `${this.baseUrl}/test/create`;
+    let url = `${this.baseUrl}/tasks`;
     return this.http.post(url, task);
   }
 
   updateTask (task: TaskDto) {
-    let url = `${this.baseUrl}/test/update/${task.id}`;
+    let url = `${this.baseUrl}/tasks/${task.taskid}`;
     return this.http.put(url, task);
   }
 
   deleteTask (id: string) {
-    let url = `${this.baseUrl}/test/delete/${id}`;
+    let url = `${this.baseUrl}/tasks/${id}`;
     return this.http.delete(url)
   }
 }

@@ -25,6 +25,7 @@ namespace PowerHub.Core.Api
             var builder = new ConfigurationBuilder()
                 .SetBasePath(environment.ContentRootPath)
                 .AddJsonFile("appsettings.json");
+
             Configuration = builder.Build();
         }
 

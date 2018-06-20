@@ -148,9 +148,11 @@ namespace PowerHub.Core.Api.Controllers
         {
             var (tasks, totalCount) = _taskService.GetAllTasks(pagination);
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(new { totalCount }));
+            Response.Headers.Add("X-Pagination", totalCount.ToString());
 
             return Ok(tasks);
         }
+
+
     }
 }

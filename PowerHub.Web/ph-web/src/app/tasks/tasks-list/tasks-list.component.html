@@ -35,10 +35,10 @@
         <td>{{task.key}}</td>
         <td>{{task.name}}</td>
         <td class="center-cell">
-          <button [routerLink]="['/tasks/update', task.id]" type="button" class="btn btn-warning">Update</button>
+          <button [routerLink]="['/tasks/update', task.taskid]" type="button" class="btn btn-warning">Update</button>
         </td>
         <td class="center-cell">
-          <button type="button" class="btn btn-danger" (click)="deleteTask(task.id)">Delete</button>
+          <button type="button" class="btn btn-danger" (click)="deleteTask(task.taskid)">Delete</button>
         </td>
       </tr>
     </tbody>

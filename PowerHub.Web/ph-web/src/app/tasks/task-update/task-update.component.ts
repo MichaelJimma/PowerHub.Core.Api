@@ -22,8 +22,8 @@ export class TaskUpdateComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) { 
     this.form = fb.group({
-      id: new FormControl({value: '', readonly: true}),
-      key: new FormControl({value: '', disabled: true}),
+      taskid: new FormControl({value: '', readonly: true}),
+      key: new FormControl({value: '', readonly: true}),
       name: ['', Validators.compose([Validators.required, Validators.maxLength(200)])],
       description: '',
     });

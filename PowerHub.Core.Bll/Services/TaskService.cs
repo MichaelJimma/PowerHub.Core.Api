@@ -69,13 +69,15 @@ namespace PowerHub.Core.Bll.Services
                 allTasks = allTasks.Where(t => t.Name.Contains(pagination.Query.ToLowerInvariant()) || t.Key.Contains(pagination.Query.ToLowerInvariant()));
             }
 
-            allTasks.Skip(pagination.PageCount * (pagination.Page - 1))
-                .Take(pagination.PageCount);
+            int totalRecords = allTasks.Count();
 
-            var allTasksList = allTasks.ToList();
+            var allTasksDto = allTasks
+                .Skip(pagination.PageCount * (pagination.Page - 1))
+                .Take(pagination.PageCount)
+                .ToList()
+                .Select(t => Mapper.Map<TaskDto>(t));
 
-            var allTasksDto = allTasks.Select(t => Mapper.Map<TaskDto>(t));
-            return (allTasksDto, allTasks.Count());
+            return (allTasksDto, totalRecords);
         }
 
         public async Task<TaskDto> GetTask(Guid taskId)
