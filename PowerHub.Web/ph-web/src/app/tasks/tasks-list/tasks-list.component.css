@@ -1,0 +1,24 @@
+.header-wrapper {
+    padding: 10px;
+}
+
+#create-task-button {
+    float:right;
+}
+
+#header {
+    float:left;
+}
+
+.clearfix {
+    float:none;
+}
+
+.center-cell {
+    text-align: center;
+} 
+
+.search-box-swapper {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
